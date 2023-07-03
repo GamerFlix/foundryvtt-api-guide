@@ -2,8 +2,8 @@
 FoundryVTT inherently runs on javascript. Javascript is a fairly common language for web development for which many tutorials exist online already and covering these would be outside the scope of this guide. As such it will not go into details on generic javascript concepts like objects, arrays and functions and instead focus on things specific to FoundryVTT’s architecture and how to use macros to manipulate things inside your game. Where relevant links to external websites might be included to provide explanation on what javascript inherent, but not Foundry specific, functions like for example `filter()` do. 
 
 Since Foundry can not create worlds without using a specific system some things you will see in screenshots may be specific to the dnd5e system. The general principles remain the same though regardless of system so extrapolation to your system of choice should be possible.
-Furthermore this guide is not the only resource that exists. For example you can find many commented code examples here.
-And this message on the FoundryVTT Discord goes in more detail regarding asynchronous functions.
+Furthermore this guide is not the only resource that exists. For example you can find many commented code examples [here](https://gitlab.com/Freeze020/foundry-vtt-scripts/-/tree/master/api-examples).
+And this [message on the FoundryVTT Discord](https://discord.com/channels/170995199584108546/699750150674972743/1039547867804745768) goes in more detail regarding asynchronous functions.
 A short overview of Foundry’s Application class can be seen [here](https://gitlab.com/Freeze020/foundry-vtt-scripts/-/tree/master/api-examples).
 
 **IMPORTANT**: If you wish to follow along, create a new world to play around in. You will eventually break things irreparably and when you do so it is important that you can just delete the broken world without any issue.
@@ -13,28 +13,28 @@ Especially when it comes to inspecting data structures, what your code is actual
 
 The first step to actually using the console is to open it. To do this press F12 (Command-option-i if you are on Mac, if that doesn’t work fn+F12 might), this opens the developer’s tools. Now navigate to the tab called console, marked by a red arrow in the image below.
 
-***INSERT IMAGE***
+![image7](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/a378d9aa-0c80-4af8-ab93-5dc8c0470e7b)
 
 Whenever you wish to enter anything into the console you will want to use the text box at the bottom:
 
-***INSERT IMAGE***
+![image11](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/6429ad25-dd49-427a-a854-e801a5d46822)
 
 The console is of vital importance anytime you want to interact with Foundry’s data structure. In this guide we will mostly make use of its autocomplete functionality and use it to “dig” through existing data structures.
 The autocompletion portion is fairly self explanatory. Anytime you enter anything you will start getting suggestions on what you might end up typing. For example if we just type `_tok` we get the suggestion of `_token`.
 
-***INSERT IMAGE***
+![image12](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/13e6402a-136d-4eb8-a75b-0d4c2106d0c5)
 
 Taking the suggestion of `_token` and hitting enter we get something like what is shown in the next screenshot. This is the last (not current!) selected token placeable. As such it might be `null` if you have not selected a token since launching the world. In that case please select a token first before hitting enter.
 
-***INSERT IMAGE***
+![image3](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/692ad4d6-a8b1-4326-9a47-f5c7c28fd3c9)
 
 While we can already see a couple fields of the token we will have to expand what the console returned to inspect it further. For that click the little white arrow on the left side.
 
-***INSERT IMAGE***
+![image9](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/7f0fb741-9b54-41f1-95b9-4d49f59997a3)
 
 After expanding we are greeted with much more information that we can expand further should the need arise but for now this suffices as a short introduction into using the console. You can do much more interesting things like looking at what arguments functions take, directly jumping to the line of code they are declared in, etc. but most of that is outside the scope of this guide.
 
-***INSERT IMAGE***
+![image10](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/5a4af180-c156-452b-a355-edd728b4a728)
 
 # Basic foundry infrastructure
 **IMPORTANT:** In case you missed the warning at the start it is highly recommended to make a new world to play around in should you wish to follow along as you will eventually break things irreperably!
@@ -47,7 +47,7 @@ The first step of every change to a document is to actually get the document we 
 
 Nearly everything you will ever need can be referred to from the `game` object. If you just want to look around in there you can just look at it like we did in the previous chapter on console usage. As such entering game into the console gives us something like this:
 
-***INSERT IMAGE***
+![image8](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/1a96a2ad-4908-47b8-8bae-ec179802019d)
 
 As you can see we have a property `actors` in there which contains every actor in the sidebar. While digging around in there is all well and good you usually only want to modify a specific actor. As such we need some way to actually grab only that specific actor. 
 For this you usually use either the `get()` or `getName()` functions which get you the document based on the passed id or name respectively. In the case of actors we also have a third method which utilizes the built in macro helper variables. When you execute a macro and have a token selected you can refer to the selected token via the variable `token` and the associated actor either directly via `actor` or for unlinked tokens `token.actor`. Note that this does not work in the console, only a macro. For more information on the relation between tokens and actors see the dedicated section later in this chapter but for now let's keep things general and get an actor from the sidebar (again referred to via `game.actors`) and use the `getName()` function to make things easy to parse.
@@ -64,7 +64,7 @@ console.log(wantedActor) // This throws Steve into the console so we can look at
 
 Since the structure of actors and items is largely dependent on the system you are using your output might look slightly different but you should get something similar to this:
 
-***INSERT IMAGE***
+![image13](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/9600023b-04fd-426e-aee6-eca146f95bef)
 
 Now we have a whole bunch of fields but let's go over some interesting ones. In most cases you will want to update system specific data such as the hp of an actor. From v10 onward this system specific data is found in the `system` field which varies from system to system and as such won't be discussed in detail here. 
 However modifying a document is pretty much the same no matter what field you want to modify. In all cases you call the `update()` method on your document and pass it an object with key:value pairs where the key is a string referring to the "path" to the property and the value is the value you wish to assign to the relevant property. Since systems often add a bunch of “shortcuts” to the actor which are derived from, for example the items the actor has, we will want to look at just the data of the actor itself. To do so we modify our previous code to reduce the complex actor document to just an object and throw it in the console once again:
@@ -74,12 +74,12 @@ console.log(wantedActor.toObject()) // This throws Steve's data into the console
 ```
 This should give us something like this:
 
-***INSERT IMAGE***
+![image5](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/e4d58496-1b51-49c1-aca8-79409c02a7ef)
 
 If you compare it to what we had previously you will notice that it’s alot cleaner and that all the helpful functions are missing. For our purposes of just figuring out what data the actor actually has this is perfect though.
 As a practical example, let's assume we know the name of an actor in the sidebar (in this case it’s called Steve) and we want to change the image of said actor. So first we again get the actor, reduce it to an object, log it and dig through the data to find what we need. Through trial and error or logical deduction we realize that the image the actor is using is saved in the img attribute of the actor.
 
-***INSERT IMAGE***
+![image1](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/64928315-84d5-4623-a9a8-b368605a1fef)
 
 Since the `img` property is directly located in the root of the actor’s data the path for our update object would be just img. If we now want to set the image to the following example path of `"icons/svg/dice-target.svg"` our updates object containing the change we wish to apply would look like this:
 ```js
@@ -104,7 +104,8 @@ let change = {"system.attributes.hp.value":1}
 
 The only difference from our image example is that we now have a path that goes deeper than just one property which is why we just chain them all together connecting the different steps with dots. For reference this is what the data looks like in the console:
 
-***INSERT IMAGE***
+![image2](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/1cd7a516-78f6-41b5-9f8e-3f4e6b8b7b1a)
+
 
 Now the values for our update object don't have to be plain values they can be variables like anything else so if we would want to set the hp of the actor to be one point lower than it is before calling the macro we would do
 
@@ -119,7 +120,7 @@ What we are doing here is to again get the actor first, calculate the new hp val
 
 With this structure you can change any document in the sidebar. Case in point, let's change the image of an item in the sidebar named `"Dagger"` from its current image to `"icons/svg/blood.svg"`. First of all we need to figure out a way to get all items in the sidebar. Digging through the game object reveals that they are contained in the `items` property of said object (so `game.items`).
 
-***INSERT IMAGE***
+![image4](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/ab71a9e8-bac3-45c9-bc03-91124509f04a)
 
 We then again get the document by name, dig around it to see what the image is saved under (omitted here but you'd use `console.log()` like before), realize the image is again saved in the `img` property, construct our change and finally update the item. In code terms this would look like this.
 
@@ -176,7 +177,7 @@ Now why even bother with the placeables then? Afterall you want the document in 
 
 The reason we need to touch placeables at all is that most functions to easily get specific scene elements are functions of the canvas which holds placeables not documents. The reason for needing those functions is that most documents embedded in a scene don’t have a name (tokens are the exception), so `getName()` falls flat, and `get()` requires an id. While you can get the id by left clicking the little book icon in the token’s sheet header (see picture below), oftentimes you don’t want this specific token you got the id of a while back, but rather whatever token you currently have selected.
 
-***INSERT IMAGE***
+![image6](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/a3bcbf1a-2995-4b58-801b-229bffab8876)
 
 Now with that out of the way let’s take a look at the previously alluded to functions.
 For walls, tokens,drawings and tiles `canvas.placeholderThatDependsOnTheDocument.controlled` gives you an array containing the placeables of the selected specified document.
