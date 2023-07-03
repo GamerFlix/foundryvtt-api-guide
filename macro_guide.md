@@ -45,7 +45,7 @@ Nearly everything you will want to modify in Foundry is a Document. That include
 
 The first step of every change to a Document is to actually get the Document we want to modify.
 
-Nearly everything you will ever need can be referred to from the `game` object. If you just want to look around in there you can just look at it like we did in the previous chapter on console usage. As such entering game into the console gives us something like this:
+Nearly everything you will ever need can be referred to from the `game` Object. If you just want to look around in there you can just look at it like we did in the previous chapter on console usage. As such entering game into the console gives us something like this:
 
 ![image8](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/1a96a2ad-4908-47b8-8bae-ec179802019d)
 
@@ -67,7 +67,7 @@ Since the structure of Actors and Items is largely dependent on the system you a
 ![image13](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/9600023b-04fd-426e-aee6-eca146f95bef)
 
 Now we have a whole bunch of fields but let's go over some interesting ones. In most cases you will want to update system specific data such as the hp of an Actor. From v10 onward this system specific data is found in the `system` field which varies from system to system and as such won't be discussed in detail here. 
-However modifying a Document is pretty much the same no matter what field you want to modify. In all cases you call the `update()` method on your Document and pass it an object with key:value pairs where the key is a string referring to the "path" to the property and the value is the value you wish to assign to the relevant property. Since systems often add a bunch of “shortcuts” to the Actor which are derived from, for example the items the Actor has, we will want to look at just the data of the Actor itself. To do so we modify our previous code to reduce the complex Actor Document to just an object and throw it in the console once again:
+However modifying a Document is pretty much the same no matter what field you want to modify. In all cases you call the `update()` method on your Document and pass it an Object with key:value pairs where the key is a string referring to the "path" to the property and the value is the value you wish to assign to the relevant property. Since systems often add a bunch of “shortcuts” to the Actor which are derived from, for example the items the Actor has, we will want to look at just the data of the Actor itself. To do so we modify our previous code to reduce the complex Actor Document to just an Object and throw it in the console once again:
 ```js
 const wantedActor=game.actors.getName("Steve") // This assigns steve to a variable
 console.log(wantedActor.toObject()) // This throws Steve's data into the console so we can look at him closer
@@ -77,17 +77,17 @@ This should give us something like this:
 ![image5](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/e4d58496-1b51-49c1-aca8-79409c02a7ef)
 
 If you compare it to what we had previously you will notice that it’s alot cleaner and that all the helpful functions are missing. For our purposes of just figuring out what data the Actor actually has this is perfect though.
-As a practical example, let's assume we know the name of an Actor in the sidebar (in this case it’s called Steve) and we want to change the image of said Actor. So first we again get the Actor, reduce it to an object, log it and dig through the data to find what we need. Through trial and error or logical deduction we realize that the image the Actor is using is saved in the img attribute of the Actor.
+As a practical example, let's assume we know the name of an Actor in the sidebar (in this case it’s called Steve) and we want to change the image of said Actor. So first we again get the Actor, reduce it to an Object, log it and dig through the data to find what we need. Through trial and error or logical deduction we realize that the image the Actor is using is saved in the img attribute of the Actor.
 
 ![image1](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/64928315-84d5-4623-a9a8-b368605a1fef)
 
-Since the `img` property is directly located in the root of the Actor’s data the path for our update object would be just img. If we now want to set the image to the following example path of `"icons/svg/dice-target.svg"` our updates object containing the change we wish to apply would look like this:
+Since the `img` property is directly located in the root of the Actor’s data the path for our update Object would be just img. If we now want to set the image to the following example path of `"icons/svg/dice-target.svg"` our updates Object containing the change we wish to apply would look like this:
 ```js
 const change={"img":"icons/svg/dice-target.svg"}
 ```
 
 For ease of use I assigned it to a variable called change but you can obviously skip that part if you want.
-Now to actually change the Actor it via name from the sidebar, construct our update object and then actually call the update (which we await since `update()` like any database operation is asynchronous).
+Now to actually change the Actor it via name from the sidebar, construct our update Object and then actually call the update (which we await since `update()` like any database operation is asynchronous).
 
 ```js
 const wantedActor=game.actors.getName("Steve") // Get our actor from the ones in the sidebar based on the name
@@ -96,8 +96,8 @@ await wantedActor.update(change) // Call the update and wait for it to finish
 ```
 Once you execute this you will notice that Steve now has a nice new image!
 
-Often you want to change system specific data though which as stated previously is located within the `system` property of the Actor. The process is nearly identical however. We again get the Actor, log the data, dig through it to find what we want, construct our update object and then call  the update.
-So for example if we were to dig in a dnd5e Actor searching for how to change the current hp value of the Actor to 1 we would end up with something like this for our update object:
+Often you want to change system specific data though which as stated previously is located within the `system` property of the Actor. The process is nearly identical however. We again get the Actor, log the data, dig through it to find what we want, construct our update Object and then call  the update.
+So for example if we were to dig in a dnd5e Actor searching for how to change the current hp value of the Actor to 1 we would end up with something like this for our update Object:
 ```js
 let change = {"system.attributes.hp.value":1}
 ```
@@ -107,7 +107,7 @@ The only difference from our image example is that we now have a path that goes 
 ![image2](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/1cd7a516-78f6-41b5-9f8e-3f4e6b8b7b1a)
 
 
-Now the values for our update object don't have to be plain values they can be variables like anything else so if we would want to set the hp of the Actor to be one point lower than it is before calling the macro we would do
+Now the values for our update Object don't have to be plain values they can be variables like anything else so if we would want to set the hp of the Actor to be one point lower than it is before calling the macro we would do
 
 ```js
 let wantedActor=game.actors.getName("xyz") // get the actor from the ones in the sidebar
@@ -116,9 +116,9 @@ let change={"system.attributes.hp.value":newValue} // construct our update objec
 await wantedActor.update(change) // actually call the update
 ```
 
-What we are doing here is to again get the Actor first, calculate the new hp value based on the current hp value, construct our update object and then actually update the Actor applying the change.
+What we are doing here is to again get the Actor first, calculate the new hp value based on the current hp value, construct our update Object and then actually update the Actor applying the change.
 
-With this structure you can change any Document in the sidebar. Case in point, let's change the image of an Item in the sidebar named `"Dagger"` from its current image to `"icons/svg/blood.svg"`. First of all we need to figure out a way to get all Items in the sidebar. Digging through the game object reveals that they are contained in the `items` property of said object (so `game.items`).
+With this structure you can change any Document in the sidebar. Case in point, let's change the image of an Item in the sidebar named `"Dagger"` from its current image to `"icons/svg/blood.svg"`. First of all we need to figure out a way to get all Items in the sidebar. Digging through the game Object reveals that they are contained in the `items` property of said Object (so `game.items`).
 
 ![image4](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/ab71a9e8-bac3-45c9-bc03-91124509f04a)
 
@@ -133,7 +133,7 @@ await wantedItem.update(change) // call the update to actually change stuff
 ## Embedded Documents
 Now you might say that's cool and all but I want to update an Item on the Actor not in the sidebar!
 This brings us to our next topic: embedded Documents. As mentioned at the start nearly everything you will modify is a Document and moving an Item from the sidebar onto an Actor creates a new Item embedded in the Actor. So now we have Documents(Items) inside a Document(Actor) ergo an Embedded Document. Since the Item we want isn't in the sidebar we won't find it in `game.items` but we will find it in the `items` property of our actor.
-So to make changes to a specific Item on a specific Actor we would first need to get the Actor then get the Item on the Actor then construct our update object and lastly call the update like before. So effectively we are just going one layer deeper than before which in practice looks like this, though this time the Dagger is embedded in Steve and not in the sidebar!
+So to make changes to a specific Item on a specific Actor we would first need to get the Actor then get the Item on the Actor then construct our update Object and lastly call the update like before. So effectively we are just going one layer deeper than before which in practice looks like this, though this time the Dagger is embedded in Steve and not in the sidebar!
 
 ```js
 let wantedActor=game.actors.getName("Steve") // Get the actor from our sidebar actors
@@ -180,8 +180,8 @@ The reason we need to touch Placeables at all is that most functions to easily g
 ![image6](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/a3bcbf1a-2995-4b58-801b-229bffab8876)
 
 Now with that out of the way let’s take a look at the previously alluded to functions.
-For Walls, Tokens, Drawings and Tiles `canvas.placeholderThatDependsOnTheDocument.controlled` gives you an array containing the Placeables of the selected specified Document.
-So `canvas.walls.controlled` would be an array holding all selected wall Placeables, `canvas.tokens.controlled` would be an array holding all selected Token Placeables, `canvas.drawings.controlled` would be the selected drawings and `canvas.tiles.controlled` an array of all selected tiles.
+For Walls, Tokens, Drawings and Tiles `canvas.placeholderThatDependsOnTheDocument.controlled` gives you an Array containing the Placeables of the selected specified Document.
+So `canvas.walls.controlled` would be an Array holding all selected wall Placeables, `canvas.tokens.controlled` would be an Array holding all selected Token Placeables, `canvas.drawings.controlled` would be the selected drawings and `canvas.tiles.controlled` an Array of all selected tiles.
 As you might have noticed templates, lights, ambient sounds, map notes were not in the list above. The reason for that is that you can’t control/select them, bringing us to the next function or helper attribute: `hover` which returns you the currently hovered Placeable. Since your mouse is busy when you are hovering over something you’d execute this via hotkey from your macro hotbar. As before, which kind of Placeable you are getting can be inferred from the command itself.
 
 `canvas.templates.hover` is the currently hovered template, `canvas.lighting.hover` is the currently hovered light source, `canvas.sounds.hover` is the currently hovered ambient sound and `canvas.notes.hover` is the currently hovered note.
@@ -191,8 +191,8 @@ Sometimes you want to update a bunch of Documents at once and while a loop archi
 
 Let’s start with the syntax for updateDocuments.
 `updateDocuments()` has to be called on the relevant class extending ClientDocumentMixin which is a fancy way of saying “call it on what type of Document you want to update”. 
-`Actor.updateDocuments()` would update multiple Actors for example while `Item.updateDocuments()` would update multiple Items. Use the console to figure out the name for the other classes, they are relatively easy to find. The function itself accepts an array of update objects which are structured nearly identically to the one passed to the `update()` function (which updates a single Document) with one exception: the `_id` field. This field holds the id of the Document that is to be updated. So let’s take the following example:
-Let’s say we have two Actors in our sidebar we want to update to the same new image at once `"Steve"` and `"Tom"`. We get Steve and Tom by name, construct our update objects and then call `Actor.updateDocuments()` which accepts an array of update objects. This would look as follows:
+`Actor.updateDocuments()` would update multiple Actors for example while `Item.updateDocuments()` would update multiple Items. Use the console to figure out the name for the other classes, they are relatively easy to find. The function itself accepts an Array of update Objects which are structured nearly identically to the one passed to the `update()` function (which updates a single Document) with one exception: the `_id` field. This field holds the id of the Document that is to be updated. So let’s take the following example:
+Let’s say we have two Actors in our sidebar we want to update to the same new image at once `"Steve"` and `"Tom"`. We get Steve and Tom by name, construct our update Objects and then call `Actor.updateDocuments()` which accepts an Array of update Objects. This would look as follows:
 ```js
 let steve=game.actors.getName("Steve") // get the document for steve
 let tom=game.actors.getName("Tom") //get the document for tom
@@ -219,11 +219,11 @@ Actor.updateDocuments(updates)
 ```
 If you can’t remember how [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) worked check out the relevant documentation on them online.
 
-Now `updateEmbeddedDocuments()` is very similar though a few differences exist. For starters you don’t call the function on the Document class itself but rather the Document the Documents you want to update are embedded on. Furthermore since you may have multiple different types of embedded Documents (Items as well as effects in the case of Actors) you need to specify what type of embedded Document your update array is meant for.
+Now `updateEmbeddedDocuments()` is very similar though a few differences exist. For starters you don’t call the function on the Document class itself but rather the Document the Documents you want to update are embedded on. Furthermore since you may have multiple different types of embedded Documents (Items as well as effects in the case of Actors) you need to specify what type of embedded Document your update Array is meant for.
 
 Let’s do this for Tokens embedded in the currently viewed scene. Assuming that the canvas is not disabled you can access the currently viewed scene via `canvas.scene`. The Tokens that are embedded in the scene can be found in `scene.tokens` so `canvas.scene.tokens` gives us all the Token Documents of the currently viewed Scene. As an example we will update the image of all Tokens that currently have the default mystery man image to a different image. So we need to:
 - Filter out all Tokens that have the mystery man icon
-- Make an array of update objects
+- Make an Array of update Objects
 - Then pass that to `updateEmbeddedDocuments().`
 
 To this end we actually need to know where the image of a Token is saved in its data. You’d get this by digging in the data like before. You’ll eventually find that the Token’s image is under `texture.src`.
@@ -242,7 +242,7 @@ canvas.scene.updateEmbeddedDocuments("Token",updates)// call updateEmbeddedDocum
 
 ## Creating Documents
 Aside from modifying existing Documents via `update()` and its siblings, you might also want to create brand new Documents.
-In order to create Documents you want to call the `create()` function to create a single Document or `createDocuments()` in case you want to batch the creation of multiple. Similar to before you just pass an object of data to `create()` or an array of such objects to `createDocuments()`. Instead of using that data to modify an existing Document, it is then used to create a new one. Note that in both cases you want to call the method on the Document’s class itself so:
+In order to create Documents you want to call the `create()` function to create a single Document or `createDocuments()` in case you want to batch the creation of multiple. Similar to before you just pass an Object of data to `create()` or an Array of such Objects to `createDocuments()`. Instead of using that data to modify an existing Document, it is then used to create a new one. Note that in both cases you want to call the method on the Document’s class itself so:
 ```js
 Item.createDocuments(
 [{
@@ -272,10 +272,10 @@ In the case of `delete()` you’d just call it on the Document itself. As such:
 game.actors.getName("Steve").delete()
 ```
 
-would delete the Actor in the sidebar named "Steve". If you want multiple you will have to pass an array of ids to `deleteDocuments()`. So if we want to delete all actors in the sidebar that are not in a folder we would need to:
+would delete the Actor in the sidebar named "Steve". If you want multiple you will have to pass an Array of ids to `deleteDocuments()`. So if we want to delete all actors in the sidebar that are not in a folder we would need to:
 - Filter out the Actors in the sidebar that don’t have a folder
-- Save the ids of those Actors to an array
-- Pass that array to `deleteDocuments()`
+- Save the ids of those Actors to an Array
+- Pass that Array to `deleteDocuments()`
 This would look as follows:
 ```js
 const noFolderItems=game.items.filter(i=>!i.folder) // filter out the items that aren't in a folder
