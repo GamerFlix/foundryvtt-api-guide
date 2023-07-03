@@ -1,3 +1,5 @@
+**This guide is written for version 10 of FoundryVTT and will not be updated.**
+
 # Introduction
 FoundryVTT inherently runs on javascript. Javascript is a fairly common language for web development for which many tutorials exist online already and covering these would be outside the scope of this guide. As such it will not go into details on generic javascript concepts like objects, arrays and functions and instead focus on things specific to FoundryVTT’s architecture and how to use macros to manipulate things inside your game. Where relevant links to external websites might be included to provide explanation on what javascript inherent, but not Foundry specific, functions like for example `filter()` do. 
 
