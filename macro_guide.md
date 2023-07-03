@@ -143,33 +143,34 @@ await wantedItem.update(change) // update the item
 ```
 
 ### Filter and find
-The other Document embedded on an Actor you might encounter on an Actor is an ActiveEffect which in v10 has a quirk in the dnd5e system in that the name property of the Document is not actually used meaning that `getName()` is not a valid way to get it. This brings us to the next point on the list which is additional ways to get specific Documents out of a collection of Documents. Where `get()` and `getName()` isn't applicable you can use `find()` and `filter()` to find the first Document that matches the condition or filter out all Documents that match the condition respectively.
+The other Document embedded on an Actor you might encounter on an Actor is an ActiveEffect in case you want to delete all currently disabled ActiveEffects on an actor it becomes clear that filtering by name is not a valid option. This brings us to the next point on the list which is additional ways to get specific Documents out of a collection of Documents. Where `get()` and `getName()` isn't applicable you can use `find()` and `filter()` to find the first Document that matches the condition or filter out all Documents that match the condition respectively.
 
 Since these functions are not Foundry specific (and indeed mirror the ones for basic Arrays in javascript) only a few Foundry specific examples will be presented here while the following links should be referred to for explanation on the [find](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/find) and [filter](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) functions.
 
-For the aforementioned ActiveEffects an often used property to find a specific effect would be `label` which contains an easily readable string.
-So to find a specific effect called `"Blinded"` on a specific Actor called `"Steve"` who is located in the sidebar we would write:
+For the aforementioned usecase of finding disabled ActiveEffects you could filter them by the `disabled` property which would be `true` in case of a disabled ActiveEffect.
+In order to find a single effect which is disabled and embedded in a specific Actor called `"Steve"` who is located in the sidebar we would write:
 ```js
 let wantedActor=game.actors.getName("Steve") // Get actor from sidebar by name
-let wantedEffect=wantedActor.effects.find(i=>i.label==="Blinded") // Get the effect on the actor by name
+let wantedEffect=wantedActor.effects.find(i=>i.disabled) // Get the effect on the actor by name
 ```
-
+Since disabled is a boolean itself this would give us the "first" disabled ActiveEffect on the Actor `"Steve"`.
 From there we can log, update, etc the effect like before since it too is just a Document.
 
-A good example for filter would be to get all Items on a specific Actor by type. Type contains whether the Item is a spell, feature or otherwise in the dnd5e, pf2e and other systems and as such is something you often filter by. While various systems have various Item types the overall structure would still be the same
-So to filter out the Items with a type of spell on a specific Actor called `"Steve"` you would do:
+Since we want to find all disabled ActiveEffects though find doesn't help us much as it only returns a single result. As such we'd use `filter()` to find all Documents matching the condition. So to find all disabled ActiveEffects we'd use:
+```js
+let wantedActor=game.actors.getName("Steve") // Get actor from sidebar by name
+let wantedEffects=wantedActor.effects.find(i=>i.disabled) // Get the effect on the actor by name
+```
+
+Another good example for filter would be to get all Items on a specific Actor by type. Type contains whether the Item is a spell, feature or otherwise in the dnd5e, pf2e and other systems and as such is something you often filter by. While various systems have various Item types the overall structure would still be the same
+So to filter out the Items with a type of `"spell"` on a specific Actor called `"Steve"` you would do:
 
 ```js
 let wantedActor=game.actors.getName("Steve") // Get actor from sidebar by name
 let wantedEffect=wantedActor.items.filter(i=>i.type===spell") // Filter the items on an actor based on having a type of "spell"
 ```
 
-With this you should be able to get and modify Documents in the sidebar or embedded in other Documents and apply changes to each of them. While you can do this individually for each Item, often it is advantageous to do all the updates at once which is something the later chapter on “batch changes” will go over.
-### Documents embedded in embedded Documents
-As a final note on embedded Documents before we move over to the next section:
-You might have noticed that you can embed effects on Items and you can embed Items on an Actor. As such you can have an effect embedded on an Item embedded on an Actor which is effectively a Document embedded in an embedded Document. Don't worry it's not only confusing for you but also for Foundry. As such you can NOT edit these double embedded Documents barring rather complicated methods that would go over the scope of this guide.
-For now just work around this limitation by adding the effects on Items in the sidebar or before they are even created on the Actor (more on creating Documents in the dedicated section).
-This limitation will be remedied in v11 however at which point this small section of the guide will be removed.
+With this you should be able to get and modify Documents in the sidebar or embedded in other Documents and apply changes to each of them. While you can do this individually for each Item, often it is advantageous to do all the updates at once which is something the later chapter on “batch changes” will go over. 
 ## Documents vs. Placeables
 You might have noticed that so far Documents embedded in the scene (namely Tokens, Walls, Ambient Lights, Ambient Sounds, Map Notes, Drawings and Templates) have not been discussed. That is because dealing with those Documents requires knowledge about the difference between Placeables and Documents. The former are the things you actually interact with on the canvas while the latter actually hold the data and can be easily modified as we established previously. 
 
