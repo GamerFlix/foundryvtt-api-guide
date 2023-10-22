@@ -22,6 +22,7 @@
 - Search for relevant thing
 
 ## pre and post hooks
+- macro folder author thingie
 
 ## Creating the module 
 
