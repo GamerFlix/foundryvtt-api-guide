@@ -21,8 +21,8 @@
 - Enable, do thing that's needed, disable
 - Search for relevant thing
 ```javascript
-Hooks.on("renderChatMessage", function (message,html){
-  html.find(`div.dice-tooltip`).addClass("expanded");
+Hooks.on("renderChatMessage", function(message, [html]) {
+  html.querySelector(".dice-tooltip")?.classList.toggle("expanded", true);
 });
 ```
 ## pre and post hooks
