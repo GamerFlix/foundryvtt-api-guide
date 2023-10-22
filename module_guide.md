@@ -25,6 +25,8 @@ Hooks.on("renderChatMessage", function(message, [html]) {
   html.querySelector(".dice-tooltip")?.classList.toggle("expanded", true);
 });
 ```
+
+- Alternatively play sound on user log in
 ## pre and post hooks
 - macro folder author thingie
 
