@@ -20,7 +20,11 @@
 - Total spam
 - Enable, do thing that's needed, disable
 - Search for relevant thing
-
+```javascript
+Hooks.on("renderChatMessage", function (message,html){
+  html.find(`div.dice-tooltip`).addClass("expanded");
+});
+```
 ## pre and post hooks
 - macro folder author thingie
 
