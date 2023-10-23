@@ -36,3 +36,4 @@ Hooks.on("renderChatMessage", function(message, [html]) {
 ## Creating the module 
 
 # Adding scripts to a package (world script and module)
+- SHUTDOWN FOUNDRY
