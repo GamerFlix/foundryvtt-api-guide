@@ -1,20 +1,24 @@
 # This is currently under construction and will remain this way for a while. Do not rely on any of it.
 
 # Writing a Small Module
-- Walk through creating small module / worldscript
-- explain how there's little difference
-- Explain hooks and usage of hooks
-- Recommend reading macro guide first if not familiar with foundry api already
+This guide will walk you through the basic steps to set up a module aswell as introduce you to the concept of `Hooks`, the backbone of many modules. Since modules use the same FoundryVTT API that Macros do this guide requires you to have at least a basic grasp on the Foundry API as fundemental concepts like updates and Console usage will not be discussed. If you have not done so yet it is strongly recommended to check the [Macro Guide](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/macro_guide.md) before hand which goes over these basic concepts.
 
-## Preamble
+The guide is structured in two parts that you may wish to reference indepdently depending on how you prefer to learn. The first part concerns itself purely with scripting concepts relevant for writing a Module. On the other hand the second part concerns itself purely with getting a blank module set up that Foundry recognizes aswell as how to add Scripts written in the first part of the guide to the Module so that Foundry executes them. Since you can't really (more on that later) test your scripts without adding them to a Package you may wish to create a Module (topic of part two) before reading the first part in case you wish to immediately test the Examples presented.
+
+On a final note it is **strongly recommended to use a test world** while developing. This was the case for Macros and is doubly true for Modules where you could create infinite loops if you are not careful. So again **use a test world**, you have been warned.
+
+## Scripting concepts relevant for writing a Module
+Before we get into the basic concepts I would once again like to urge you to **use a test world** if you wish to follow along the guide.
+
 - *why* you want a world script / module and why executing as a macro is not enough
 - Macro executed only on one client
 - Module code gets executed during startup
 - If something needs to happen on multiple clients -> Module
 - But if it gets executed at startup how do you react to X, only execute when x happens?
 - Hooks, next section:
+- Reloading to take effect
 
-## Hooks and You: Finding them in the console
+### Hooks and You: Finding them in the console
 - CONFIG.debug.hooks=true
 - Screenshot
 - Total spam
@@ -30,10 +34,14 @@ Hooks.on("renderChatMessage", function(message, [html]) {
 ```
 - Alternatively play sound on user log in
 - add sounds for a door
-## pre and post hooks
+### pre and post hooks
 - macro folder author thingie
 
-## Creating the module 
+## Setting up a module
 
-# Adding scripts to a package (world script and module)
+### Creating the module 
+
+### Adding scripts to a package (world script and module)
 - SHUTDOWN FOUNDRY
+- What gets cleared on reload
+
