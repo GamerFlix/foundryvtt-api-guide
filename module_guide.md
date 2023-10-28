@@ -18,6 +18,13 @@ This is where we get into the main topic of this guide: `Hooks`.
 
 ### Hooks and You: Finding them in the console
 
+***Rethink the structure of this section and probably axe ther start and start over***
+
+The fundamental concept of `Hooks` is that a Hook of a given name is called when something specific happens. Some examples include a token being hovered, an Actor being updated or a Sheet being rendered. All of these actions call the relevant Hook which then causes all functions registered for that Hook to be executed.
+
+For example
+
+
 `Hooks` allow you to "react" to things happening
 
 - CONFIG.debug.hooks=true
