@@ -6,7 +6,8 @@ Furthermore this guide is not the only resource that exists. For example you can
 And this [message on the FoundryVTT Discord](https://discord.com/channels/170995199584108546/699750150674972743/1039547867804745768) goes in more detail regarding asynchronous functions.
 A short overview of Foundry’s Application class can be seen [here](https://gitlab.com/Freeze020/foundry-vtt-scripts/-/tree/master/api-examples).
 
-This guide has been updated for v11. While there are only minor differences a v10 version can be found [here](https://github.com/GamerFlix/foundryvtt-api-guide/blob/v10/macro_guide.md).
+This guide is still being updated for v12 but should already be correct for the most part. If you find any inaccuracies please open an issue. 
+While there are only minor differences a v11 version can be found [here](https://github.com/GamerFlix/foundryvtt-api-guide/blob/v11/macro_guide.md).
 
 **IMPORTANT**: If you wish to follow along, create a new world to play around in. You will eventually break things irreparably and when you do so it is important that you can just delete the broken world without any issue.
 
