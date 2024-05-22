@@ -302,6 +302,6 @@ The Actors associated with unlinked Tokens is what we call a â€œsynthetic Actorâ
 
 
 # Conclusion
-This concludes the introduction into basic Foundry infrastructure. If you would like to read up on how Compendiums work and how you can asynchronously fetch Documents from them please refer to the Guide on Advanced Foundry infrastructure. The aforementioned guide also explains the concept of Collections. 
+This concludes the introduction into basic Foundry infrastructure. If you would like to read up on how Compendiums work and how you can asynchronously fetch Documents from them please refer to the [Guide on Advanced Foundry infrastructure](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/advanced_api_guide.md). The aforementioned guide also explains the concept of Collections. 
 
 I hope you found this guide helpful.
