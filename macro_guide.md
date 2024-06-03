@@ -300,9 +300,6 @@ As you may know each Token on the scene is used to represent an Actor. If you re
 
 The Actors associated with unlinked Tokens is what we call a “synthetic Actor” because it is computed from the source Actor in the sidebar and data on the Token telling foundry what should be different from the sidebar Actor. You can find this data in the `delta` embedded Document of the Token though unless you know what you are doing you probably shouldn’t mess with it, instead updating the Actor you get from `token.actor` like usual. The reason this might be of importance to you however is that the id of that synthetic Actor is identical to the one in the sidebar, however unlike the source Actor it isn’t in the sidebar so you can’t go via `Actor.updateDocuments()` as the id you would pass it would just target the sidebar Actor. This leads to many edge cases and confusing situations, so if you ever notice that you are changing the sidebar Actor when you want a Token’s synthetic Actor, remind yourself that you want to go via `token.actor`.
 
-# Scene Regions
-
-
 # Conclusion
 This concludes the introduction into basic Foundry infrastructure. If you would like to read up on how Compendiums work and how you can asynchronously fetch Documents from them please refer to the [Guide on Advanced Foundry infrastructure](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/advanced_api_guide.md). The aforementioned guide also explains the concept of Collections. 
 
