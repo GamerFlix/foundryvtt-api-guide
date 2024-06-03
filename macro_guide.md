@@ -162,7 +162,7 @@ From there we can log, update, etc the effect like before since it too is just a
 Since we want to find all disabled ActiveEffects though find doesn't help us much as it only returns a single result. As such we'd use `filter()` to find all Documents matching the condition. So to find all disabled ActiveEffects we'd use:
 ```js
 let wantedActor=game.actors.getName("Steve") // Get actor from sidebar by name
-let wantedEffects=wantedActor.effects.find(i=>i.disabled) // Get the effect on the actor by name
+let wantedEffects=wantedActor.effects.filter(i=>i.disabled) // Get the effect on the actor by name
 ```
 
 Another good example for filter would be to get all Items on a specific Actor by type. Type contains whether the Item is a spell, feature or otherwise in the dnd5e, pf2e and other systems and as such is something you often filter by. While various systems have various Item types the overall structure would still be the same
