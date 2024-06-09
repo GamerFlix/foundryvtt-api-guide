@@ -36,7 +36,7 @@ With that done we now have an Array of Documents in the `myDocs` variable which 
 ```js
 const myPack=game.packs.get("dnd5e.items") // Get the Pack
 const myDocs=await myPack.getDocuments() // Get all Documents in the Pack technically don't need to save it to a variable
-const abacus=mayPack.getName("Abacus") // The Document we wanted
+const abacus=myPack.getName("Abacus") // The Document we wanted
 ```
 If you read along closely you might have noticed that this gets *all* Documents in the Pack only to then actually get a single one out of that Collection which is rather inefficient. It would have been better to only retrieve the single Document we actually want. We can do that using the `Pack#getDocument()` function. This takes the id of a Document contained in the Pack to retrieve only that Document. In practice this would look like this:
 
@@ -45,7 +45,16 @@ const myPack=game.packs.get("dnd5e.items") // get the Pack
 const abacus=await myPack.getDocument("ea4xclqsksEQB1QF") // Get the Document by its id
 ```
 
-Once you have retrieved the Document you can update, reference, delete, etc. it like usual. The methods only differ if you wish to batch your changes or create new Documents within the Pack, the topic of the next section.
+This is useful when you only want one specific Document but often you want all Documents with a specific property. For example if we were to get all Documents with a Name of "Abacus" we could do that as follows:
+
+```js
+const myPack=game.packs.get("dnd5e.items") // get the Pack
+const abacusDocs = await myPack.getDocuments({name: "Abacus"}) // get all Documents with a name of Abacus
+```
+
+This would work for any other property on the Document so you can also query for type or flags.
+
+However you do it, once you have retrieved the Document you can update, reference, delete, etc. it like usual. The methods only differ if you wish to batch your changes or create new Documents within the Pack, which is the topic of the next section.
 
 ### Things to keep in mind when editing Documents contained within a Compendium
 The primary thing to keep in mind when trying to edit Documents in a Compendium is ironically the most obvious one: They are located in the Pack, not the Collection of Documents in the World. The relevance of this becomes obvious when you realize that many function such as `create()`, `createDocuments()`, `deleteDocuments()`, `updateDocuments()` and so on default to the Collection in the World. If this is the first time you hear of these function I encourage to read the earlier sections on [Batch changes](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/macro_guide.md#batch-changes) and [Creating Documents](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/macro_guide.md#creating-documents).
