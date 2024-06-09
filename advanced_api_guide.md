@@ -32,11 +32,11 @@ Once we have located the Pack we could technically iterate over it but as establ
 const myPack=game.packs.get("dnd5e.items") // Get the Pack
 const myDocs=await myPack.getDocuments() // Get all Documents in the Pack
 ```
-With that done we now have a Collection of Documents in the `myDocs` variable which we can use as usual. So if we wanted to get a specific item with a name of "Abacus" we could simply call `getName` on the Collection of Documents:
+With that done we now have an Array of Documents in the `myDocs` variable which we can use as usual. However the Pack now also has the Documents cached, so if we wanted to get a specific item with a name of "Abacus" we could simply call `getName` on the Collection of Documents:
 ```js
 const myPack=game.packs.get("dnd5e.items") // Get the Pack
-const myDocs=await myPack.getDocuments() // Get all Documents in the Pack
-const abacus=myDocs.getName("Abacus") // The Document we wanted
+const myDocs=await myPack.getDocuments() // Get all Documents in the Pack technically don't need to save it to a variable
+const abacus=mayPack.getName("Abacus") // The Document we wanted
 ```
 If you read along closely you might have noticed that this gets *all* Documents in the Pack only to then actually get a single one out of that Collection which is rather inefficient. It would have been better to only retrieve the single Document we actually want. We can do that using the `Pack#getDocument()` function. This takes the id of a Document contained in the Pack to retrieve only that Document. In practice this would look like this:
 
