@@ -70,7 +70,7 @@ Since the structure of Actors and Items is largely dependent on the system you a
 ![image13](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/9600023b-04fd-426e-aee6-eca146f95bef)
 
 Now we have a whole bunch of fields but let's go over some interesting ones. In most cases you will want to update system specific data such as the hp of an Actor. From v10 onward this system specific data is found in the `system` field which varies from system to system and as such won't be discussed in detail here. 
-However modifying a Document is pretty much the same no matter what field you want to modify. In all cases you call the `update()` method on your Document and pass it an Object with key:value pairs where the key is a string referring to the "path" to the property and the value is the value you wish to assign to the relevant property. Since systems often add a bunch of “shortcuts” to the Actor which are derived from, for example the items the Actor has, we will want to look at just the data of the Actor itself. To do so we modify our previous code to reduce the complex Actor Document to just an Object and throw it in the console once again:
+However modifying a Document is pretty much the same no matter what field you want to modify. In all cases you call the `update()` method on your Document and pass it an Object with key:value pairs where the key is a string referring to the "path" to the property and the value is the value you wish to assign to the relevant property. Since systems often add a bunch of “shortcuts” to the Actor which are derived from, for example the items the Actor has, we will want to look at just the data of the Actor itself. To do so we modify our previous code to call the Document specific function `toObject` and then log the return value instead of the whole Document. This is useful as `toObject()` reduces the complex Actor Document to just a simple Object. The resulting code looks like this:
 ```js
 const wantedActor=game.actors.getName("Steve") // This assigns steve to a variable
 console.log(wantedActor.toObject()) // This throws Steve's data into the console so we can look at him closer
@@ -162,7 +162,7 @@ From there we can log, update, etc the effect like before since it too is just a
 Since we want to find all disabled ActiveEffects though find doesn't help us much as it only returns a single result. As such we'd use `filter()` to find all Documents matching the condition. So to find all disabled ActiveEffects we'd use:
 ```js
 let wantedActor=game.actors.getName("Steve") // Get actor from sidebar by name
-let wantedEffects=wantedActor.effects.find(i=>i.disabled) // Get the effect on the actor by name
+let wantedEffects=wantedActor.effects.filter(i=>i.disabled) // Get the effect on the actor by name
 ```
 
 Another good example for filter would be to get all Items on a specific Actor by type. Type contains whether the Item is a spell, feature or otherwise in the dnd5e, pf2e and other systems and as such is something you often filter by. While various systems have various Item types the overall structure would still be the same
@@ -299,9 +299,6 @@ On a final slightly more advanced note let’s talk about Tokens and their relat
 As you may know each Token on the scene is used to represent an Actor. If you remove the associated Actor from the sidebar the Token breaks and double clicking it throws an error telling you that it can no longer find its Token. Similar to how we can double click a Token to open the associated Actor’s sheet, we can refer to the Actor associated with a Token in a macro by accessing the Actor property of the Token. So `token.actor` would give us the Actor Document associated with the Token. Now some of you may have noticed that unlinked Tokens exist, for which the Actor associated with the Token differs from the “source” Actor in the sidebar. This is what we call a synthetic Actor which has a bunch of quirks which we will go over shortly. Most of these are purely of academic interest though so should this not be of interest to you, just take away that you want to use `token.actor` to get the Actor of a relevant Token.
 
 The Actors associated with unlinked Tokens is what we call a “synthetic Actor” because it is computed from the source Actor in the sidebar and data on the Token telling foundry what should be different from the sidebar Actor. You can find this data in the `delta` embedded Document of the Token though unless you know what you are doing you probably shouldn’t mess with it, instead updating the Actor you get from `token.actor` like usual. The reason this might be of importance to you however is that the id of that synthetic Actor is identical to the one in the sidebar, however unlike the source Actor it isn’t in the sidebar so you can’t go via `Actor.updateDocuments()` as the id you would pass it would just target the sidebar Actor. This leads to many edge cases and confusing situations, so if you ever notice that you are changing the sidebar Actor when you want a Token’s synthetic Actor, remind yourself that you want to go via `token.actor`.
-
-# Scene Regions
-
 
 # Conclusion
 This concludes the introduction into basic Foundry infrastructure. If you would like to read up on how Compendiums work and how you can asynchronously fetch Documents from them please refer to the [Guide on Advanced Foundry infrastructure](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/advanced_api_guide.md). The aforementioned guide also explains the concept of Collections. 
