@@ -179,7 +179,7 @@ You might have noticed that so far Documents embedded in the scene (namely Token
 
 Now why even bother with the Placeables then? Afterall you want the Document in the end anyhow.
 
-The reason we need to touch Placeables at all is that most functions to easily get specific scene elements are functions of the canvas which holds Placeables not Documents. The reason for needing those functions is that most Documents embedded in a scene don’t have a name (Tokens are the exception), so `getName()` falls flat, and `get()` requires an id. While you can get the id by left clicking the little book icon in the Token’s sheet header (see picture below), oftentimes you don’t want this specific Token you got the id of a while back, but rather whatever Token you currently have selected.
+The reason we need to touch Placeables at all is that most functions to easily get specific scene elements are functions of the canvas which holds Placeables not Documents. The reason for needing those functions is that most Documents embedded in a scene don’t have a name (Tokens are the exception), so `getName()` falls flat, and `get()` requires an id. While you can get the id by right clicking the little book icon in the Token’s sheet header (see picture below), oftentimes you don’t want this specific Token you got the id of a while back, but rather whatever Token you currently have selected.
 
 ![image6](https://github.com/GamerFlix/foundryvtt-api-guide/assets/62909799/a3bcbf1a-2995-4b58-801b-229bffab8876)
 
