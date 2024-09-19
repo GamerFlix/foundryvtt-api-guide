@@ -118,6 +118,8 @@ if (game.user!==game.users.activeGM) return
 game.scenes.getName("name of scene").activate()//activate speciifc scene
 ```
 
+## Requesting additional examples
+
 If you need additional examples for scripts that are not longer than 2-5 lines of code feel free to make an issue.
 
 ## empty example for future copying
