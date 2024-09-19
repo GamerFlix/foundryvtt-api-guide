@@ -5,6 +5,7 @@ Since Foundry can not create worlds without using a specific system some things 
 Furthermore this guide is not the only resource that exists. For example you can find many commented code examples [here](https://gitlab.com/Freeze020/foundry-vtt-scripts/-/tree/master/api-examples).
 And this [message on the FoundryVTT Discord](https://discord.com/channels/170995199584108546/699750150674972743/1039547867804745768) goes in more detail regarding asynchronous functions.
 A short overview of Foundry’s Application class can be seen [here](https://gitlab.com/Freeze020/foundry-vtt-scripts/-/tree/master/api-examples).
+For a guide specifically on Regions see [here](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/region_macros_guide.md)
 
 This guide has been updated for v12. If you find any inaccuracies please open an issue. 
 While there are only minor differences a v11 version can be found [here](https://github.com/GamerFlix/foundryvtt-api-guide/blob/v11/macro_guide.md).
