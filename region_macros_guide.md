@@ -12,7 +12,7 @@ While the Script and Macro behaviours may look identical at first glance there a
 
 Most notably Macro behaviors still require the executing user to have permissions to execute the relevant Macro Document and by default they are only executed by a single User with sufficient permissions though this can be changed by ticking a checkbox (see image below). 
 
-IMAGE OF CHECKBOX
+![macro_behavior_checkbox](https://github.com/user-attachments/assets/1ac33cda-1622-43c4-a1b9-5ceac15acb13)
 
 Script behaviors on the other hand are not limited by any permissions and always execute on all connected clients. This can be quite useful in cases where you want to trigger actions on other clients which would normally require a module.In many cases this however means that you will have to ensure that your code that actually does something is only executed where needed, and most importantly only once in most cases, via additional lines of code near the start of the script. More on that later. 
 
@@ -47,11 +47,11 @@ To quote [mdn web docs]("https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 This means that all variables passed directly to the function can be accessed in this object, therefore giving us a complete overview as to what the region provides our script with. Logging it looks something like this once expanded:
 
-IMAGE OF ARGUMENTS
+![image_of_arguments](https://github.com/user-attachments/assets/d65b5f05-b301-4ea3-9371-745e425b3445)
 
 While this may seem a little overwhelming at first it isn't too bad once you realize that the line marked in the image above tells you what the names of all the passed variables are. I also color-coded the variables so you can see the difference between Script (top image) and Macro (bottom image) Behaviors. If we use this knowledge to annotate the image for clarity it becomes quite clear what argument is what:
 
-IMAGE HERE
+![annotated_arguments_cut](https://github.com/user-attachments/assets/e1898201-c083-4d35-8b82-2bf10159e21a)
 
 Most of the time you will want to look at the `event` argument. Not only does it hold information about what Event triggered the behavior but `event.data` holds information about triggered the Event e.g. the Document of the Token that entered a Region which would be `event.data.token` in case of the "Token Enters" Event.
 
@@ -117,6 +117,8 @@ Since only a GM can activate Scene's the first line ensures execution by only on
 if (game.user!==game.users.activeGM) return
 game.scenes.getName("name of scene").activate()//activate speciifc scene
 ```
+
+If you need additional examples for scripts that are not longer than 2-5 lines of code feel free to make an issue.
 
 ## empty example for future copying
 code block only for scripts if applicable
