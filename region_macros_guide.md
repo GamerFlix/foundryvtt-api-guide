@@ -1,7 +1,4 @@
 # Introduction
-
-This guide is currently under construction and should not be relied upon
-
 This guide will walk you through how to make your Macros or Scripts work with the Scene region behaviours of "Execute Macro" or "Execute Script" respectively. In doing so it however assumes that you already know how to accomplish the relevant task in a normal Macro or Script. If this is not the case please refer to [this guide which introduces you to basic Foundry infrastructure](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/macro_guide.md)
 
 For general information on Regions refer to the [Official Knowledge Base article on Regions](https://foundryvtt.com/article/scene-regions/). I will not cover how to add Behaviors or Events in general.
