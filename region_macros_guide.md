@@ -118,6 +118,28 @@ if (game.user!==game.users.activeGM) return
 game.scenes.getName("name of scene").activate()//activate speciifc scene
 ```
 
+## Increase the elevation of a triggering Token
+To ensure that only the triggering user's character sheet is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
+```js
+if (game.user!==event.user) return
+```
+Main codeblock you need:
+```js
+event.data.token.update({elevation:event.data.token.elevation+10})
+```
+This will incrase the elevation of a triggering Token by 10. Adjust the 10 as nessecary.
+
+## Set the elevation of a triggering Token
+To ensure that only the triggering user's character sheet is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
+```js
+if (game.user!==event.user) return
+```
+Main codeblock you need:
+```js
+event.data.token.update({elevation:10})
+```
+This will set the elevation of a triggering Token to 10. Adjust the 10 as nessecary.
+
 ## Requesting additional examples
 
 If you need additional examples for scripts that are not longer than 2-5 lines of code feel free to make an issue.
