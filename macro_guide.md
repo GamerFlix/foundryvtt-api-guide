@@ -301,6 +301,22 @@ As you may know each Token on the scene is used to represent an Actor. If you re
 
 The Actors associated with unlinked Tokens is what we call a “synthetic Actor” because it is computed from the source Actor in the sidebar and data on the Token telling foundry what should be different from the sidebar Actor. You can find this data in the `delta` embedded Document of the Token though unless you know what you are doing you probably shouldn’t mess with it, instead updating the Actor you get from `token.actor` like usual. The reason this might be of importance to you however is that the id of that synthetic Actor is identical to the one in the sidebar, however unlike the source Actor it isn’t in the sidebar so you can’t go via `Actor.updateDocuments()` as the id you would pass it would just target the sidebar Actor. This leads to many edge cases and confusing situations, so if you ever notice that you are changing the sidebar Actor when you want a Token’s synthetic Actor, remind yourself that you want to go via `token.actor`.
 
+## Flags
+Every Document posesses a `flags` property which is intended to store arbitrary data. This is primarily used by Modules but also particularly helpful for Macros in which you wish to save some form of data between executions. The `flags` property is fundamentally identical in usage to any other property so you can update it as normal however a couple helper functions exist to enforce convention and to try and prevent you from accidentally overriding the data of others. These helper functions are `Document#setFlag(scope,key,value)` which is similar in usage to `update`, `Document#setFlag(scope,key)` which returns the relevant value or `undefined` should no such value exist and ultimately `Document#unsetFlag(scope,key)` which deletes the relevant property.
+In these cases `scope` is a String with valid values being the ids of enabled Modules or `"world"`. The latter is what you should use, should you wish to save arbitrary data on your Document. The `key` is likewise a String and unlike the `scope` which is more or less predetermined can be any arbitrary string of your choice. Do note that this should be unique but also note that just like with update paths you can use dot notation to set nested properties i.e. a `key` of "foo.bar" would result in an object of `{foo:{bar:value}}`.
+
+### Example:
+The following script if executed in a Macro will set a value of `2` on the Macro Document under `MacroDocument.flags.world.foo.bar` should no such property be set and otherwise delete the property:
+```js
+const myData=this.getFlag("world","foo.bar")//get the flag
+if (!myData){//if the flag doesn't exist set it
+await this.setFlag("world","foo.bar",2)// save the flag on the Macro Document
+}else{//Otherwise show the value in a notification and remove it
+ui.notifications.notify(`Value on the Macro was:${myData}`)// Show notif
+await this.unsetFlag("world","foo.bar")//remove value from Macro Document
+}
+```
+
 # Conclusion
 This concludes the introduction into basic Foundry infrastructure. If you would like to read up on how Compendiums work and how you can asynchronously fetch Documents from them please refer to the [Guide on Advanced Foundry infrastructure](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/advanced_api_guide.md). The aforementioned guide also explains the concept of Collections. 
 
