@@ -306,8 +306,7 @@ Every Document posesses a `flags` property which is intended to store arbitrary 
 In these cases `scope` is a String with valid values being the ids of enabled Modules or `"world"`. The latter is what you should use, should you wish to save arbitrary data on your Document. The `key` is likewise a String and unlike the `scope` which is more or less predetermined can be any arbitrary string of your choice. Do note that this should be unique but also note that just like with update paths you can use dot notation to set nested properties i.e. a `key` of "foo.bar" would result in an object of `{foo:{bar:value}}`.
 
 ### Example:
-The following script if executed in a Macro will set a value of `2` on the Macro Document under `MacroDocument.flags.world.foo.bar` should no such property be set and otherwise delete the property:
-```js
+The following script if executed in a Macro will set a value of `2` on the Macro Document under `MacroDocument.flags.world.foo.bar` should no such property be set and otherwise delete the `bar` property, leavin behind an empty object at `MacroDocument.flags.world.foo`
 const myData=this.getFlag("world","foo.bar")//get the flag
 if (!myData){//if the flag doesn't exist set it
 await this.setFlag("world","foo.bar",2)// save the flag on the Macro Document
