@@ -308,12 +308,12 @@ In these cases `scope` is a String with valid values being the ids of enabled Mo
 ### Example:
 The following script if executed in a Macro will set a value of `2` on the Macro Document under `MacroDocument.flags.world.foo.bar` should no such property be set and otherwise delete the `bar` property, leaving behind an empty object at `MacroDocument.flags.world.foo`.
 ```js
-const myData=this.getFlag("world", "foo.bar")//get the flag
-if (!myData){//if the flag doesn't exist set it
-   await this.setFlag("world", "foo.bar", 2)// save the flag on the Macro Document
-}else{//Otherwise show the value in a notification and remove it
-   ui.notifications.notify(`Value on the Macro was:${myData}`)// Show notif
-   await this.unsetFlag("world", "foo.bar")//remove value from Macro Document
+const myData = this.getFlag("world", "foo.bar")//get the flag
+if (!myData) {//if the flag doesn't exist set it
+    await this.setFlag("world", "foo.bar", 2)// save the flag on the Macro Document
+} else {//Otherwise show the value in a notification and remove it
+    ui.notifications.notify(`Value on the Macro was:${myData}`)// Show notif
+    await this.unsetFlag("world", "foo.bar")//remove value from Macro Document
 }
 ```
 
