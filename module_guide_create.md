@@ -6,7 +6,7 @@ In order to have a module to attach scripts to you first need to create it. Shou
 
 ![create_module](https://github.com/user-attachments/assets/c4e5da14-225b-4d2d-b220-dcb43468c322)
 
-On the next page you can fill in various things like the module title that is later displayed in your manage modules list. You don't need to fill in everything and the default values are largely fine as you can edit them later if you wish to do so. There is however **one exception** to this. And that is the identifier of the Package. **The identifier can not be changed later** (without breaking everything depending on it) so try to think of one that is unlikely to collide with anything else.
+On the next page you can fill in various things like the module title that is later displayed in your manage modules list. You don't need to fill in everything and the default values are largely fine as you can edit them later if you wish to do so. There is however **one exception** to this: The identifier of the Package. **The identifier can not be changed later** (without breaking everything depending on it) so try to think of one that is unlikely to collide with anything else.
 
 ![Id_is_important](https://github.com/user-attachments/assets/3549317c-4c78-432e-9e77-c35c8fc35c49)
 
