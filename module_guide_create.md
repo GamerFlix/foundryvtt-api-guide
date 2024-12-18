@@ -20,15 +20,25 @@ macOS - ~/Library/Application Support/FoundryVTT
 Linux - ~/.local/share/FoundryVTT
 
 Once you have found your userdata navigate to the `modules` folder and then the folder of your module, the name of which is identical to the identifier you chose earlier:
+
 ![find module](https://github.com/user-attachments/assets/7159a36b-e740-4426-b19e-4899473c48c9)
+
 Open the folder and then edit the Manifest. Since this is a Module it'll be called `module.json`. It should look something like this though it may have more fields if you also have Compendium Packs or dependencies specified.
+
 ![grafik](https://github.com/user-attachments/assets/87180019-6f41-406b-8cd0-f62e614cd303)
+
 Add a new line **in the root of the object** so directly inside the brackets on the first and last line **not** inside another set of brackets therein. Add a key of `"esmodules"` with a value of an Array in there and keep an eye on the commas. They should be between each element but not after the last on of each Object/Array. An example can be seen here:
+
 ![grafik](https://github.com/user-attachments/assets/3338bd58-1aec-4f8d-bbf4-6783f9024146)
+
 Now in your modules folder createa a new text file and give it a name of your choice. Change the extension to `.js`. If you are on Windows you may need to enable showing those first a tutorial to which can be found [here](https://support.microsoft.com/en-us/windows/common-file-name-extensions-in-windows-da4a4430-8e76-89c5-59f7-1cdbbc75cb01).
+
 ![grafik](https://github.com/user-attachments/assets/3c61ddbe-c16d-4428-b185-642ee881f69a)
+
 This will be the file you post all your code in which you can do now. Back in the manifest add the filename to your Array. In my case I called it `"myScript.js"`(see picture above) so that will be what I write in the Array:
+
 ![grafik](https://github.com/user-attachments/assets/51a4e0f2-f9ea-4627-be15-db310de690f0)
+
 **Save the file then close it.** Open Foundry back up and check if the module still appears in your list. If not you likely have an errant comma or similar in your Manifest. In this case I recommend using an IDE such as [VSCode](https://code.visualstudio.com/) or an [online JSON linter](https://jsonlint.com/) to find the issue. You can also always ask for additional assistance on the [official FoundryVTT Discord server](https://discord.com/invite/foundryvtt)
 If everything appears fine and you haven't added your code to the `.js` file yet do so now and save it. In order for this to take effect you will need to refresh though, for edits of `.js` files you do not need to fully restart as that is only nessecary when editing the manifest.
 
