@@ -27,7 +27,7 @@ Open the folder, create a new text file and give it a name of your choice. Chang
 
 ![grafik](https://github.com/user-attachments/assets/3c61ddbe-c16d-4428-b185-642ee881f69a)
 
-Add your code to the `.js` file and save it. Now go back to the folder and edit the Manifest. Since this is a Module it'll be called `module.json`. Once opened it should look something like this though it may have more fields if you also have Compendium Packs or dependencies specified.
+Add your code to the `.js` file and save it. Now go back to the folder of your module and edit the Manifest. Since this is a Module it'll be called `module.json`. Once opened it should look something like this though it may have more fields if you also have Compendium Packs or dependencies specified.
 
 ![grafik](https://github.com/user-attachments/assets/87180019-6f41-406b-8cd0-f62e614cd303)
 
