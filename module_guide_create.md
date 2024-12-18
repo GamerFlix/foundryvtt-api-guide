@@ -1,4 +1,5 @@
 # Setting up a module
+This guide will take you through the steps of creating a module and adding a script to it. It will however not go over writing the relevant code which will be the topic of a future guide.
 
 ## Creating the module 
 In order to have a module to attach scripts to you first need to create it. Should you already have one for sharing Compendiums between worlds you can use that one though it doesn't hurt to make a second one to be able to deactivate all scripts without removing your Compendiums. Luckily Foundry takes care of the creation for you with an easy to use GUI. To access it go to the setup page. and click the little cog Icon next to "Update All" on the Add-on Modules tab:
