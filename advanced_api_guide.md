@@ -3,7 +3,7 @@ If you have not read the basic macro guide found [here](https://github.com/Gamer
 
 Like before it also recommended that you **make a test world** if you wish to follow along as you are likely to cause irreperable damage eventually while trying out things.
 
-This guide has been updated for v12. If you find any inaccuracies please open an issue. 
+This guide has been updated for v12. If you find any inaccuracies please open an issue. It should also be up to date for v13 as none of the changes should have an impact on this guide. Again please open an issue should you find something to the contrary.
 While there are only minor differences a v11 version can be found at the end of [this guide](https://github.com/GamerFlix/foundryvtt-api-guide/blob/v11/macro_guide.md).
 
 # Advanced Foundry Infrastructure
