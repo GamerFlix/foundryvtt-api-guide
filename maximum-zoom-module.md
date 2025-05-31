@@ -9,7 +9,7 @@ Either by digging around in the console, asking somebody else who has done so or
 
 While we could simply assign a new value to this in a Macro and be done, this would need to be manually reapplied after each reload which is why a Module that sets it for us is much more suitable.
 
-However since scripts and esmodules attached to a Module are executed way before the CONFIG object exists we'll need to register a function on a suitable Hook that changes the value for us. For more indepth information on Hooks see this wiki article but for our purposes the "ready" hook, which is called at the end of the initialization, will suffice.
+However since scripts and esmodules attached to a Module are executed way before the CONFIG object exists we'll need to register a function on a suitable Hook that changes the value for us. For more indepth information on Hooks see [this wiki article](https://foundryvtt.wiki/en/development/api/hooks) but for our purposes the "ready" hook, which is called at the end of the initialization, will suffice.
 As such all you need to do if you wish to set the zoom level to a fixed value would be the following code:
 
 ```javascript
@@ -55,4 +55,4 @@ CONFIG.Canvas.maxZoom=game.settings.get("your-module-id-here","maximumZoom");//m
 })
 ```
 
-And just like that we have all we need to adjust the maximum zoom on the fly! All that remains now is to attach the code to a Module, if you haven't done so already, and configure the setting to your liking. As a reminder you can find a guide on creating a Module and attaching a script to it here.
+And just like that we have all we need to adjust the maximum zoom on the fly! All that remains now is to attach the code to a Module, if you haven't done so already, and configure the setting to your liking. As a reminder you can find a guide on creating a Module and attaching a script to it [here](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/module_guide_create.md).
