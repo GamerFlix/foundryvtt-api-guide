@@ -51,7 +51,7 @@ Now that we have registered a setting we'll need to actually use it, rather than
 To do so we simply get the value of the setting and use that rather than a fixed number:
 ```javascript
 Hooks.once("ready",()=>{
-CONFIG.canvas.maxZoom=game.settings.get("your-module-id-here","maximumZoom");//module id and setting id respectively
+CONFIG.Canvas.maxZoom=game.settings.get("your-module-id-here","maximumZoom");//module id and setting id respectively
 })
 ```
 
