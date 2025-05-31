@@ -5,7 +5,7 @@ In this guide we'll go over the code nessecary to create a small Module that adj
 ## Hooks and adjusting the CONFIG
 
 Many aspects of Foundry can be adjusted by simply making changes to the global `CONFIG` object. Among the ability of registering new door sounds and making changes to system behaviour (if supported by the system) this also includes the goal of this Module: Changing the maximum zoom level.
-Either by digging around in the console, asking somebody else who has done so or looking at the source code you will come to find that the maximum zoom level is controlled by the value set in  `CONFIG.Canvas.maxZoom`.
+Either by digging around in the console, asking somebody else who has done so or looking at the source code you will come to find that the maximum zoom level is controlled by the value set in  `CONFIG.Canvas.maxZoom`. Likewise `CONFIG.Canvas.minZoom` configures how far you can zoom out. For the sake of brevity only `maxZoom` is mentioned below but you could feasibly replace it with `minZoom` should you wish to configure that instead.
 
 While we could simply assign a new value to this in a Macro and be done, this would need to be manually reapplied after each reload which is why a Module that sets it for us is much more suitable.
 
@@ -14,7 +14,7 @@ As such all you need to do if you wish to set the zoom level to a fixed value wo
 
 ```javascript
 Hooks.once("ready",()=>{
-CONFIG.canvas.maxZoom=20;//Or whatever value you want
+CONFIG.Canvas.maxZoom=20;//Or whatever value you want
 })
 ```
 
@@ -46,7 +46,8 @@ game.settings.register('the-id-of-your-module-goes-here', 'maximumZoom', {//maxi
 ```
 Do note that you'll need to adjust the id of your module in the code above to be identical to the one you chose during the Module creation process.
 
-Now that we have registered a setting we'll need to actually use it, rather than our fixed number, to set the max zoom in our setup hook. Otherwise the CONFIG would only be adjusted when you change the setting due to the onChange function.
+Now that we have registered a setting we'll need to actually use it, rather than our fixed number, to set the max zoom in our setup hook. Otherwise the CONFIG would only be adjusted when you change the setting due to the
+`onChange` function.
 
 To do so we simply get the value of the setting and use that rather than a fixed number:
 ```javascript
