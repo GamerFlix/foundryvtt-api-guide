@@ -36,7 +36,7 @@ Now with that out of the way let's take a closer look at what arguments script a
 Since putting a complete list of arguments in this writeup would take a long time of triggering, taking screenshots, and verifying this has not been done yet in favor of actually publishing this guide. That being said there are a couple importants points to go over here. The first is how to even check what arguments are available. This is doubly important in case you have modules or your system modifying regions.
 In order to see what arguments are passed to a relevant script or macro you will simply want to put the following line into the code:
 ```js
-console.log(arugments)
+console.log(arguments)
 ```
 To quote [mdn web docs]("https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments"):
 
