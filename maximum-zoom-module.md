@@ -29,7 +29,7 @@ We do this with the following snippet. Please make sure to read the comments as 
 Hooks.once("init",()=>{
 game.settings.register('the-id-of-your-module-goes-here', 'maximumZoom', {//maximumZoom is the id of the setting, we'll need this later to get the value of it!
   name: 'Maximum Zoom',//just a name could be called whatever you want
-  hint: 'Sets the maximum zoom level you can zoom out to on the canvas.',//explanation text, likewise whatever you want
+  hint: 'Sets the maximum zoom level you can zoom in to on the canvas.',//explanation text, likewise whatever you want
   scope: 'world',     // "world" means only the GM can adjust and its the same for everyone, "client" means everyone has to adjust it themselves AND it's browser(client) bound
   config: true,       // If false it won't appear in the configure settings page
   type: Number,//we need a number
