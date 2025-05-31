@@ -26,7 +26,7 @@ To do so we add another block of code that gets executed during the "init" Hook 
 We do this with the following snippet. Please make sure to read the comments as they explain the reasoning behind some of the values and alternative decisions you could make. For example using a client setting would allow everyone to set their own max zoom level at the cost of it being browser bound and as such the value being lost when you delete local storage.
 
 ```javascript
-Hooks.once("init",()={
+Hooks.once("init",()=>{
 game.settings.register('the-id-of-your-module-goes-here', 'maximumZoom', {//maximumZoom is the id of the setting, we'll need this later to get the value of it!
   name: 'Maximum Zoom',//just a name could be called whatever you want
   hint: 'Sets the maximum zoom level you can zoom out to on the canvas.',//explanation text, likewise whatever you want
@@ -37,7 +37,7 @@ game.settings.register('the-id-of-your-module-goes-here', 'maximumZoom', {//maxi
   onChange: value => { // value is the new value of the setting
  CONFIG.Canvas.maxZoom=value;
   },
-  requiresReload: true,//since we reapply the setting onChange we don't need to reload
+  requiresReload: false,//since we reapply the setting onChange we don't need to reload, we will need to swap scenes though before it takes effect
   range: {
     min: 0//no negative max zoom
   },
