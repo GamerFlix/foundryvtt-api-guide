@@ -7,7 +7,7 @@ And this [message on the FoundryVTT Discord](https://discord.com/channels/170995
 A short overview of Foundry’s Application class can be seen [here](https://gitlab.com/Freeze020/foundry-vtt-scripts/-/tree/master/api-examples).
 For a guide specifically on Regions see [here](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/region_macros_guide.md)
 
-This guide has been updated for v12. If you find any inaccuracies please open an issue. 
+This guide has been updated for v12. If you find any inaccuracies please open an issue. It should also be up to date for v13 as none of the changes should have an impact on this guide. Again please open an issue should you find something to the contrary.
 While there are only minor differences a v11 version can be found [here](https://github.com/GamerFlix/foundryvtt-api-guide/blob/v11/macro_guide.md).
 
 **IMPORTANT**: If you wish to follow along, create a new world to play around in. You will eventually break things irreparably and when you do so it is important that you can just delete the broken world without any issue.
