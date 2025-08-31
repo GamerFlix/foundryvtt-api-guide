@@ -79,7 +79,7 @@ game.actors.getName("name of the actor").sheet.render(true) //Open specific acto
 ```
 
 ## Open a specific Journal Entry
-To ensure that only the triggering user's character sheet is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
+To ensure that the Journal Entry is only opened for the triggering User ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
 ```js
 if (game.user!==event.user) return
 ```
@@ -89,7 +89,7 @@ game.journal.getName("name of journal").sheet.render(true)//open speciifc JE
 ```
 
 ## Open a specific Journal Page
-To ensure that only the triggering user's character sheet is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
+To ensure that the Journal Entry Page is only opened for the triggering User ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
 ```js
 if (game.user!==event.user) return
 ```
@@ -99,7 +99,7 @@ const page = game.journal.getName("name of journal").pages.getName("name of page
 ```
 
 ## View a specific Scene
-To ensure that only the triggering user's character sheet is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
+To ensure that the Scene is only viewed for the triggering User ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
 ```js
 if (game.user!==event.user) return
 ```
@@ -116,7 +116,7 @@ game.scenes.getName("name of scene").activate()//activate speciifc scene
 ```
 
 ## Increase the elevation of a triggering Token
-To ensure that only the triggering user's character sheet is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
+To ensure that only the triggering User tries to update the Token is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
 ```js
 if (game.user!==event.user) return
 ```
@@ -127,7 +127,7 @@ event.data.token.update({elevation:event.data.token.elevation+10})
 This will incrase the elevation of a triggering Token by 10. Adjust the 10 as nessecary.
 
 ## Set the elevation of a triggering Token
-To ensure that only the triggering user's character sheet is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
+To ensure that only the triggering User tries to update the Token is opened ensure that the the check box in the Macro Behavior config is **unchecked**. In case of a Script Behavior add the following line at the top of the script:
 ```js
 if (game.user!==event.user) return
 ```
