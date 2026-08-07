@@ -50,7 +50,7 @@ While this may seem a little overwhelming at first it isn't too bad once you rea
 
 ![annotated_arguments_cut](https://github.com/user-attachments/assets/e1898201-c083-4d35-8b82-2bf10159e21a)
 
-Most of the time you will want to look at the `event` argument. Not only does it hold information about what Event triggered the behavior but `event.data` holds information about triggered the Event e.g. the Document of the Token that entered a Region which would be `event.data.token` in case of the "Token Enters" Event.
+Most of the time you will want to look at the `event` argument. Not only does it hold information about what Event triggered the behavior but `event.data` also holds information about what triggered the Event e.g. the Document of the Token that entered a Region which would be `event.data.token` in case of the "Token Enters" Event.
 
 # Example scripts
 With that out of the way let's look at some example scripts. Where relevant these will be seperated into
